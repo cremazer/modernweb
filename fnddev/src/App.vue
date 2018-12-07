@@ -1,24 +1,43 @@
 <template>
-  <v-app>
-    <v-toolbar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>open_in_new</v-icon>
-      </v-btn>
+  <v-app id="inspire">
+    <v-navigation-drawer
+      v-model="drawer"
+      fixed
+      app
+    >
+      <v-list class="pt-0" dense>
+        <v-divider light></v-divider>
+
+        <v-list-tile
+          v-for="item in items"
+          :key="item.title"
+          :to="item.to"
+        >
+          <v-list-tile-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-tile-action>
+
+          <v-list-tile-content>
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-toolbar color="indigo" dark fixed app>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-title>Chain Stitch</v-toolbar-title>
     </v-toolbar>
 
     <v-content>
-      <router-view/>
+      <v-container fluid grid-list-lg>
+        <router-view></router-view>
+      </v-container>
     </v-content>
+
+    <v-footer color="indigo" app>
+      <span class="white--text">&copy; {{ new Date().getFullYear() }}</span>
+    </v-footer>
   </v-app>
 </template>
 
@@ -28,8 +47,37 @@ export default {
   name: 'App',
   data () {
     return {
-      //
+      drawer: null,
+      items: [
+        {
+          title: 'Home',
+          icon: 'dashboard',
+          to: {
+            path: '/'
+          }
+        },
+        {
+          title: 'User',
+          icon: 'question_answer',
+          to: {
+            path: '/user'
+          }
+        },
+        {
+          title: 'Help',
+          icon: 'help',
+          to: {
+            path: '/help'
+          }
+        }
+      ],
+      right: null,
+      mini: false
     }
+  },
+  props: {
+    source: String
   }
 }
+
 </script>
