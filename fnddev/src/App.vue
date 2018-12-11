@@ -57,7 +57,7 @@ export default {
           }
         },
         {
-          title: 'User',
+          title: 'Users',
           icon: 'question_answer',
           to: {
             path: '/user'

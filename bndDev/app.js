@@ -39,3 +39,32 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+//mongodb connect
+const mongoose = require('mongoose');
+// const User = require('./models/users');
+// console.log(User);
+mongoose.connect('mongodb://localhost:27017/choims', { useNewUrlParser: true }, (err) => {
+    if (err) return console.error(err);
+    console.log('mongoose connnected!');
+});
+
+// User.create({ name: 'haha' })
+//     .then(r => console.log(r))
+//     .catch(e => console.error(e));
+
+// User.find()
+//     .then(r => console.log(r))
+//     .catch(e => console.error(e));
+
+// User.updateOne({ _id: '5c09fd2cf7a12f2a90208278' }, { $set: { age: 34 }})
+//     .then(r => {
+//         console.log(r);
+//         return User.find()
+//     })
+//     .then(r => console.log(r))
+//     .catch(e => console.error(e));
+//
+// User.deleteOne({ age: 77 })
+//     .then(r => console.log(r))
+//     .catch(e => console.error(e));
